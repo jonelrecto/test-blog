@@ -35,40 +35,40 @@ defmodule TestBlogWeb.UserPostControllerTest do
     current_user
   end
 
-  setup %{conn: conn} do
-    # {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  # setup %{conn: conn} do
+  #   # {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  #
+  #   {:ok, conn: conn, current_user: current_user} = setup_current_user(conn)
+  #   {:ok, conn: put_req_header(conn, "accept", "application/json"), current_user: current_user}
+  # end
 
-    {:ok, conn: conn, current_user: current_user} = setup_current_user(conn)
-    {:ok, conn: put_req_header(conn, "accept", "application/json"), current_user: current_user}
-  end
-
-  describe "index" do
-    test "lists all user_posts", %{conn: conn} do
-      conn = get(conn, Routes.user_post_path(conn, :index))
-      assert json_response(conn, 200)["data"] == []
-    end
-  end
-
-  describe "create user_post" do
-    test "renders user_post when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.user_post_path(conn, :create), user_post: @create_attrs)
-      assert %{"id" => id} = json_response(conn, 201)["data"]
-
-      conn = get(conn, Routes.user_post_path(conn, :show, id))
-
-      assert %{
-               "id" => id,
-               "body" => "some body",
-               "likes" => nil,
-               "title" => "some title"
-             } = json_response(conn, 200)["data"]
-    end
-
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.user_post_path(conn, :create), user_post: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-  end
+  # describe "index" do
+  #   test "lists all user_posts", %{conn: conn} do
+  #     conn = get(conn, Routes.user_post_path(conn, :index))
+  #     assert json_response(conn, 200)["data"] == []
+  #   end
+  # end
+  #
+  # describe "create user_post" do
+  #   test "renders user_post when data is valid", %{conn: conn} do
+  #     conn = post(conn, Routes.user_post_path(conn, :create), user_post: @create_attrs)
+  #     assert %{"id" => id} = json_response(conn, 201)["data"]
+  #
+  #     conn = get(conn, Routes.user_post_path(conn, :show, id))
+  #
+  #     assert %{
+  #              "id" => id,
+  #              "body" => "some body",
+  #              "likes" => nil,
+  #              "title" => "some title"
+  #            } = json_response(conn, 200)["data"]
+  #   end
+  #
+  #   test "renders errors when data is invalid", %{conn: conn} do
+  #     conn = post(conn, Routes.user_post_path(conn, :create), user_post: @invalid_attrs)
+  #     assert json_response(conn, 422)["errors"] != %{}
+  #   end
+  # end
 
   # describe "update user_post" do
   #   setup [:create_user_post]
@@ -106,18 +106,18 @@ defmodule TestBlogWeb.UserPostControllerTest do
   #   end
   # end
 
-  defp create_user_post(_) do
-    user_post = fixture(:user_post)
-    {:ok, user_post: user_post}
-  end
-
-  defp setup_current_user(conn) do
-    current_user = user_fixture(:current_user)
-    require IEx
-    IEx.pry()
-    {:ok,
-      conn: Test.init_test_session(conn, current_user_id: current_user.id),
-      current_user: current_user
-    }
-  end
+  # defp create_user_post(_) do
+  #   user_post = fixture(:user_post)
+  #   {:ok, user_post: user_post}
+  # end
+  #
+  # defp setup_current_user(conn) do
+  #   current_user = user_fixture(:current_user)
+  #   require IEx
+  #   IEx.pry()
+  #   {:ok,
+  #     conn: Test.init_test_session(conn, current_user_id: current_user.id),
+  #     current_user: current_user
+  #   }
+  # end
 end

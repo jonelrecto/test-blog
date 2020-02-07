@@ -18,8 +18,8 @@ defmodule TestBlogWeb.ErrorView do
     %{errors: %{detail: assigns.message}}
   end
 
-  def render("404.json", assigns) do
-    %{errors: %{detail: assigns.message}}
+  def render("404.json", _assigns) do
+    %{errors: %{detail: "Not Found"}}
   end
 
   def render("error.json", %{error: %{"field" => field, "message" => error}}) do

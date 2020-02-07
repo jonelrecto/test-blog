@@ -5,6 +5,7 @@ defmodule TestBlogWeb.ErrorViewTest do
   import Phoenix.View
 
   test "renders 404.json" do
+    
     assert render(TestBlogWeb.ErrorView, "404.json", []) == %{errors: %{detail: "Not Found"}}
   end
 
